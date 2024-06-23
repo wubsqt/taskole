@@ -16,21 +16,30 @@ namespace taskole
                 message.Append(' ');
             }
 
-            using (StreamWriter sw = new StreamWriter(path + file))
+            try
             {
-                sw.WriteLine(message);
+                using (StreamWriter sw = new StreamWriter(path + file))
+                {
+                    sw.WriteLine(message);
+                }
+            }
+            catch(Exception e)
+            {
+                SetColors.Red();
+                Console.WriteLine(e.ToString());
+                SetColors.Default();
             }
 
-            Console.ForegroundColor = ConsoleColor.Green;
+            SetColors.Green();
             Console.WriteLine("Task was successfully added !");
-            Console.ResetColor();
+            SetColors.Default();
         }
 
         public static void RemoveTask()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            SetColors.Green();
             Console.WriteLine("Task was successfully removed ...!");
-            Console.ResetColor();
+            SetColors.Default();
         }
     }
 }

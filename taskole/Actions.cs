@@ -7,7 +7,6 @@ namespace taskole
         public static void Initial()
         {
             string _path = "tasks/";
-            string _file = "test1.txt";
 
             void CreateSavingPlace(string path)
             {
@@ -18,8 +17,8 @@ namespace taskole
             if (!Checkers.IsSavingPlaceExist(_path))
                 CreateSavingPlace(_path);
 
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            ClearScreen();
+            SetColors.Magenta();
             Console.Write("Taskole Is Running ");
 
             for (int i = 0; i < 5; i++)
@@ -29,7 +28,7 @@ namespace taskole
             }
 
             Console.WriteLine("\n");
-            Console.ResetColor();
+            SetColors.Default();
         }
 
         public static void ClearScreen()

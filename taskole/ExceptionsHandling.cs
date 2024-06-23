@@ -10,16 +10,16 @@ namespace taskole
     {
         public static void CommandNotValid()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            SetColors.Yellow();
             Console.WriteLine("Command was not found .........");
-            Console.ResetColor();
+            SetColors.Default();
         }
 
         public static void EmptyCommand()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            SetColors.Red();
             Console.WriteLine("enter a valid command");
-            Console.ResetColor();
+            SetColors.Default();
         }
     }
 }
