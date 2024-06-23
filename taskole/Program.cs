@@ -11,7 +11,7 @@ namespace taskole
             while (true)
             {
                 Console.Write("> ");
-                var command = Console.ReadLine();
+                string? command = Console.ReadLine();
                 string[] words = command.Split(" ").ToArray();
 
                 #region Check the special Commands
@@ -46,6 +46,12 @@ namespace taskole
                     case "remove":
                         {
                             Crud.RemoveTask();
+                            continue;
+                        }
+
+                    case "list":
+                        {
+                            Crud.GetTaskList();
                             continue;
                         }
 

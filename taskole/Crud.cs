@@ -4,12 +4,14 @@ namespace taskole
 {
     public static class Crud
     {
+        public static string path = "tasks/";
+        public static string file = "test1.txt";
+     
+        // TODO : fix overwrite in add task 
+        // TODO : make msgs beauty
         public static void AddTask(string[] msg)
         {
-            string path = "tasks/";
-            string file = "test1.txt";
             StringBuilder message = new StringBuilder();
-
             foreach (var word in msg)
             {
                 message.Append(word);
@@ -23,7 +25,7 @@ namespace taskole
                     sw.WriteLine(message);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 SetColors.Red();
                 Console.WriteLine(e.ToString());
@@ -40,6 +42,15 @@ namespace taskole
             SetColors.Green();
             Console.WriteLine("Task was successfully removed ...!");
             SetColors.Default();
+        }
+
+        public static void GetTaskList()
+        {
+            using (StreamReader sr = new StreamReader(path + file))
+            {
+                var lines = sr.ReadToEnd();
+                Console.WriteLine(lines);
+            }
         }
     }
 }
