@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace taskole
 {
@@ -10,15 +6,19 @@ namespace taskole
     {
         public static void AddTask(string[] msg)
         {
-            // TODO : FIX (it don't add text to file)
-            if (!Directory.Exists("tasks/"))
-                Directory.CreateDirectory("tasks/");
-            else
-            {
-                if (!File.Exists("tasks/task1.txt"))
-                    File.Create("tasks/task1.txt");
+            string path = "tasks/";
+            string file = "test1.txt";
+            StringBuilder message = new StringBuilder();
 
-                File.WriteAllLines("tasks/task1.txt", msg);
+            foreach (var word in msg)
+            {
+                message.Append(word);
+                message.Append(' ');
+            }
+
+            using (StreamWriter sw = new StreamWriter(path + file))
+            {
+                sw.WriteLine(message);
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
