@@ -27,6 +27,11 @@ namespace taskole
             Console.ForegroundColor = ConsoleColor.Yellow;
         }
 
+        public static void Cyan()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+        }
+
         public static void Default()
         {
             Console.ResetColor();

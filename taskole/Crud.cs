@@ -6,12 +6,13 @@ namespace taskole
     {
         public static string path = "tasks/";
         public static string file = "test1.txt";
-     
+
         // TODO : fix overwrite in add task 
         // TODO : make msgs beauty
         public static void AddTask(string[] msg)
         {
             StringBuilder message = new StringBuilder();
+
             foreach (var word in msg)
             {
                 message.Append(word);
@@ -46,11 +47,22 @@ namespace taskole
 
         public static void GetTaskList()
         {
+            string? lines;
             using (StreamReader sr = new StreamReader(path + file))
             {
-                var lines = sr.ReadToEnd();
-                Console.WriteLine(lines);
+                lines = sr.ReadToEnd();
             }
+
+            SetColors.Cyan();
+            Console.Write("ID\tDescription\t\t");
+            SetColors.Red();
+            Console.Write("Date Time\n");
+            SetColors.Cyan();
+            Console.Write("--\t----------\t\t");
+            SetColors.Red();
+            Console.WriteLine("---------");
+            SetColors.Default();
+
         }
     }
 }
