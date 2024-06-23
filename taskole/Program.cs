@@ -6,10 +6,27 @@
         {
             Initial();
 
+            while (true)
+            {
+                Console.Write("> ");
+                var command = Console.ReadLine();
 
+                if (command == "exit")
+                {
+                    Exit();
+                    break;
+                }
+            }
 
-            Console.ReadLine();
+            // TODO : remove this for the realease time
             Console.ReadKey();
+        }
+
+        public static void Exit()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"logout on {DateTime.Now} ...");
+            Console.ResetColor();
         }
 
         public static void Initial()
@@ -25,7 +42,7 @@
             }
 
             Console.WriteLine("\n");
-            Console.Write("> ");
+            Console.ResetColor();
         }
     }
 }
