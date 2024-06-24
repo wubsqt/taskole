@@ -7,8 +7,6 @@ namespace taskole
         public static string path = "tasks/";
         public static string file = "test1.txt";
 
-        // TODO : fix overwrite in add task 
-        // TODO : make msgs beauty
         public static void AddTask(string[] msg)
         {
             StringBuilder message = new StringBuilder();
@@ -21,10 +19,8 @@ namespace taskole
 
             try
             {
-                using (StreamWriter sw = new StreamWriter(path + file))
-                {
-                    sw.WriteLine(message);
-                }
+                File.AppendAllText((path + file), message.ToString());
+                File.AppendAllText((path + file), "\n");
             }
             catch (Exception e)
             {
@@ -47,22 +43,52 @@ namespace taskole
 
         public static void GetTaskList()
         {
-            string? lines;
-            using (StreamReader sr = new StreamReader(path + file))
+            List<string> lines = new List<string>();
+            string line;
+
+            try
             {
-                lines = sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(path + file))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        lines.Add(line);
+                    }
+                }
             }
 
-            SetColors.Cyan();
-            Console.Write("ID\tDescription\t\t");
-            SetColors.Red();
-            Console.Write("Date Time\n");
-            SetColors.Cyan();
-            Console.Write("--\t----------\t\t");
-            SetColors.Red();
-            Console.WriteLine("---------");
-            SetColors.Default();
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("There is no task, create one with 'add' command and your message.");
+            }
 
+            catch (Exception e)
+            {
+                SetColors.Red();
+                Console.WriteLine(e.Message);
+                SetColors.Default();
+            }
+
+            ShowHeaderOfList();
+
+            foreach (var l in lines)
+            {
+                Console.WriteLine(l);
+            }
+            Console.WriteLine();
+
+            static void ShowHeaderOfList()
+            {
+                SetColors.Cyan();
+                Console.Write("Description\t\t\t\t\t\t\t");
+                SetColors.Red();
+                Console.Write("Date Time\n");
+                SetColors.Cyan();
+                Console.Write("-----------\t\t\t\t\t\t\t");
+                SetColors.Red();
+                Console.WriteLine("---------");
+                SetColors.Default();
+            }
         }
     }
 }
