@@ -19,6 +19,8 @@ namespace taskole
 
             try
             {
+                string time = $"{DateTime.Now.ToString()},";
+                File.AppendAllText((path + file), time);
                 File.AppendAllText((path + file), message.ToString());
                 File.AppendAllText((path + file), "\n");
             }
@@ -73,20 +75,22 @@ namespace taskole
 
             foreach (var l in lines)
             {
-                Console.WriteLine(l);
+                var parts = l.Split(",");
+                Console.Write(parts[0]);
+                Console.Write("\t\t\t" + parts[1]);
             }
             Console.WriteLine();
 
             static void ShowHeaderOfList()
             {
-                SetColors.Cyan();
-                Console.Write("Description\t\t\t\t\t\t\t");
                 SetColors.Red();
-                Console.Write("Date Time\n");
+                Console.Write("Date Time\t\t\t\t");
                 SetColors.Cyan();
-                Console.Write("-----------\t\t\t\t\t\t\t");
+                Console.Write("Description\n");
                 SetColors.Red();
-                Console.WriteLine("---------");
+                Console.Write("---------");
+                SetColors.Cyan();
+                Console.WriteLine("\t\t\t\t-----------");
                 SetColors.Default();
             }
         }
