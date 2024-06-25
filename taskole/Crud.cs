@@ -11,10 +11,14 @@ namespace taskole
         {
             StringBuilder message = new StringBuilder();
 
+
             foreach (var word in msg)
             {
-                message.Append(word);
-                message.Append(' ');
+                if (word != "add")
+                {
+                    message.Append(word);
+                    message.Append(' ');
+                }
             }
 
             try
@@ -77,7 +81,7 @@ namespace taskole
             {
                 var parts = l.Split(",");
                 Console.Write(parts[0]);
-                Console.Write("\t\t\t" + parts[1]);
+                Console.WriteLine("\t\t\t" + parts[1]);
             }
             Console.WriteLine();
 
