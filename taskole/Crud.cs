@@ -6,11 +6,11 @@ namespace taskole
     {
         public static string path = "tasks/";
         public static string file = "test1.txt";
+        public static int lineNumber = 1;
 
         public static void AddTask(string[] msg)
         {
             StringBuilder message = new StringBuilder();
-
 
             foreach (var word in msg)
             {
@@ -24,8 +24,9 @@ namespace taskole
             try
             {
                 string time = $"{DateTime.Now.ToString()},";
-                File.AppendAllText((path + file), time);
-                File.AppendAllText((path + file), message.ToString());
+                File.AppendAllText((path + file), $"{lineNumber.ToString()},");
+                File.AppendAllText((path + file), $"{time}");
+                File.AppendAllText((path + file), $"{message.ToString()}");
                 File.AppendAllText((path + file), "\n");
             }
             catch (Exception e)
@@ -34,6 +35,7 @@ namespace taskole
                 Console.WriteLine(e.ToString());
                 SetColors.Default();
             }
+            lineNumber += 1;
 
             SetColors.Green();
             Console.WriteLine("Task was successfully added !");
@@ -81,18 +83,19 @@ namespace taskole
             {
                 var parts = l.Split(",");
                 Console.Write(parts[0]);
-                Console.WriteLine("\t\t\t" + parts[1]);
+                Console.WriteLine("\t" + parts[1] + "\t\t\t" + parts[2]);
             }
             Console.WriteLine();
 
             static void ShowHeaderOfList()
             {
                 SetColors.Red();
+                Console.Write("ID\t");
                 Console.Write("Date Time\t\t\t\t");
                 SetColors.Cyan();
-                Console.Write("Description\n");
+                Console.WriteLine("Description");
                 SetColors.Red();
-                Console.Write("---------");
+                Console.Write("--\t" + "---------");
                 SetColors.Cyan();
                 Console.WriteLine("\t\t\t\t-----------");
                 SetColors.Default();
